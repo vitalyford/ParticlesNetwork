@@ -106,7 +106,7 @@ public class GPanelForGame extends GBPanel implements ActionListener {
 	}
 	
 	public void changeMinDistToDrawEdges(int minDist) {
-	    if (minDist > 10 && minDist < 400)
+	    if (minDist >= 10 && minDist <= 400)
 	        MIN_DIST_TO_DRAW_EDGES = minDist;
 	}
 
@@ -193,7 +193,7 @@ public class GPanelForGame extends GBPanel implements ActionListener {
     }
     
     private float getDist(Particle p1, Particle p2) {
-        return (float)(Math.sqrt(Math.pow(p1.x - p2.x, 2.0) + Math.pow(p1.y - p2.y, 2.0)));
+        return (float)(Math.sqrt(Math.pow(p1.x + p1.r - p2.x - p2.r, 2.0) + Math.pow(p1.y + p1.r - p2.y - p2.r, 2.0)));
     }
     
     private void drawEdges(Graphics g, List<Shape> shapes, float minDistanceToDraw) {
@@ -204,6 +204,11 @@ public class GPanelForGame extends GBPanel implements ActionListener {
     	        if (dist < minDistanceToDraw) {
     	            ((Graphics2D)g).setStroke(new BasicStroke(EDGE_THICKNESS - (dist / minDistanceToDraw) * EDGE_THICKNESS));
     	            ((Graphics2D)g).draw(new Line2D.Double(particles.get(i).x + particles.get(i).r, particles.get(i).y + particles.get(i).r, particles.get(j).x + particles.get(j).r, particles.get(j).y + particles.get(j).r));
+    	        }
+    	        // check if the particles are collided and then change their angles
+    	        if (dist < particles.get(i).r + particles.get(j).r) {
+    	            particles.get(i).angle = 2 * particles.get(j).angle - particles.get(i).angle;
+    	            particles.get(j).angle = 2 * particles.get(i).angle - particles.get(j).angle;
     	        }
     	    }
     	}
