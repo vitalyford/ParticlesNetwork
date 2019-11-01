@@ -28,17 +28,6 @@ class Particle {
         this.angle = angle * 2 * Math.PI; // convert to radians
     }
     
-    Particle(Particle twin) {
-        load(twin);
-    }
-    
-    void load(Particle twin) {
-        this.x = twin.x;
-        this.y = twin.y;
-        this.r = twin.r;
-        this.angle = twin.angle;
-    }
-    
     void move(double dist, int width, int height) {
         x = (int)(x + Math.cos(angle) * dist);
         y = (int)(y + Math.sin(angle) * dist);
