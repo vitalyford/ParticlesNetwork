@@ -155,7 +155,7 @@ public class GPanelForGame extends GBPanel implements ActionListener {
         // Redraw the whole app, it will clear up all the previous drawings
         super.paintComponent(g);
         
-    	shapes.clear(); // clear the shapes
+    	shapes.clear();
 
     	// Add particles to the shapes
     	for (int i = 0; i < N; i++) {
@@ -169,7 +169,7 @@ public class GPanelForGame extends GBPanel implements ActionListener {
         	((Graphics2D)g).fill(s);
         }
         
-        shapes.clear(); // clear the shapes
+        shapes.clear();
         
         // Draw the edges if necessary
         drawEdges(g, shapes, MIN_DIST_TO_DRAW_EDGES);
